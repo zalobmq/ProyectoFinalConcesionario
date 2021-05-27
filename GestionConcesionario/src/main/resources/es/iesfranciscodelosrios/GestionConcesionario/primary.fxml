@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.iesfranciscodelosrios.GestionConcesionario.PrimaryController">
+   <children>
+      <MenuBar layoutY="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Archivo">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Mostrar coches" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Ayuda">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#infoApp" text="Sobre la app" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Separator layoutX="165.0" layoutY="26.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="26.0" />
+      <GridPane layoutY="26.0" prefHeight="202.0" prefWidth="167.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="26.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="179.4" minHeight="10.0" prefHeight="40.999975585937506" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="349.8000205993652" minHeight="10.0" prefHeight="333.8000244140625" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+               <children>
+                  <Button mnemonicParsing="false" text="⨁">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" text="✏" />
+                  <Button mnemonicParsing="false" text="⨂" />
+               </children>
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" top="8.0" />
+               </GridPane.margin>
+            </HBox>
+            <TableView fx:id="tabladeclientes" prefHeight="334.0" prefWidth="180.0" GridPane.rowIndex="1">
+              <columns>
+                <TableColumn fx:id="nombrecliente" prefWidth="84.00006103515625" text="Nombre" />
+                <TableColumn fx:id="dnicliente" prefWidth="81.60002441406249" text="DNI" />
+              </columns>
+            </TableView>
+         </children>
+      </GridPane>
+      <Separator layoutX="274.0" layoutY="155.0" prefWidth="200.0" AnchorPane.leftAnchor="167.0" AnchorPane.rightAnchor="0.0" />
+      <GridPane layoutX="256.0" layoutY="40.0" prefHeight="130.0" prefWidth="433.0" AnchorPane.leftAnchor="167.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="26.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Edad">
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Telefono" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Mis coches" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="edadcliente" text="Label" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="telefonocliente" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Ver coches" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+      </GridPane>
+      <TableView fx:id="tabladecoches" layoutX="264.0" layoutY="158.0" prefHeight="242.0" prefWidth="433.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="167.0" AnchorPane.rightAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="matriculacoche" prefWidth="114.40000915527344" text="Matricula" />
+          <TableColumn fx:id="marcacoche" prefWidth="64.0" text="Marca" />
+            <TableColumn fx:id="colorcoche" prefWidth="69.5999755859375" text="Color" />
+            <TableColumn fx:id="potenciacoche" prefWidth="83.2000732421875" text="Potencia" />
+            <TableColumn fx:id="preciocoche" prefWidth="102.40008544921875" text="Precio" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

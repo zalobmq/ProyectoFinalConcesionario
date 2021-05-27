@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView layoutX="200.0" layoutY="200.0" prefHeight="322.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="matriculacoche" prefWidth="155.20001220703125" text="Matricula" />
+          <TableColumn fx:id="marcacoche" prefWidth="120.0" text="Marca" />
+            <TableColumn fx:id="colorcoche" prefWidth="96.79998779296875" text="Color" />
+            <TableColumn fx:id="potenciacoche" prefWidth="116.79998779296875" text="Potencia" />
+            <TableColumn fx:id="preciocoche" prefWidth="113.5999755859375" text="Percio" />
+        </columns>
+      </TableView>
+      <GridPane layoutX="200.0" prefHeight="77.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.800048828125" minWidth="10.0" prefWidth="164.0000244140625" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="438.39996337890625" minWidth="10.0" prefWidth="436.79997558593743" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="44.000006103515624" minHeight="10.0" prefHeight="44.000006103515624" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="33.60001220703125" minHeight="10.0" prefHeight="32.799993896484374" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <HBox prefHeight="36.0" prefWidth="436.0" spacing="80.0" GridPane.columnIndex="1">
+               <children>
+                  <Label text="MARCA" />
+                  <Label text="COLOR" />
+                  <Label text="POTENCIA" />
+               </children>
+               <GridPane.margin>
+                  <Insets left="50.0" right="50.0" top="10.0" />
+               </GridPane.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="50.0" right="50.0" />
+               </GridPane.margin>
+               <children>
+                  <MenuButton mnemonicParsing="false" text="MenuButton">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                  </MenuButton>
+                  <MenuButton mnemonicParsing="false" text="MenuButton">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                  </MenuButton>
+                  <MenuButton mnemonicParsing="false" text="MenuButton">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                  </MenuButton>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" text="⨁" />
+                  <Button mnemonicParsing="false" text="✏" />
+               </children>
+               <GridPane.margin>
+                  <Insets left="20.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+               <padding>
+                  <Insets left="22.0" right="25.0" />
+               </padding>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <children>
+                  <Button mnemonicParsing="false" text="⨂" />
+               </children>
+               <GridPane.margin>
+                  <Insets left="30.0" right="30.0" />
+               </GridPane.margin>
+               <padding>
+                  <Insets left="38.0" />
+               </padding>
+            </HBox>
+         </children>
+      </GridPane>
+      <Separator layoutX="161.0" layoutY="77.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+   </children>
+</AnchorPane>
