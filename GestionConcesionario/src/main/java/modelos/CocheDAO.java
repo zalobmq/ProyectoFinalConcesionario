@@ -239,7 +239,10 @@ public class CocheDAO  extends Coche{
 						c.setPotencia(rs.getInt("potencia"));
 						c.setColor(rs.getString("color"));
 						c.setPrecio(rs.getDouble("precio"));
-						c.setCliente(ClienteDAO.getClientePorDNI(rs.getString("dni_cliente")));
+						if(rs.getString("dni_cliente") !=null) {
+							c.setCliente(ClienteDAO.getClientePorDNI(rs.getString("dni_cliente")));
+
+						}
 						
 						result.add(c);
 						

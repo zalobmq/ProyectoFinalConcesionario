@@ -1,26 +1,18 @@
 package es.iesfranciscodelosrios.GestionConcesionario;
 
-
 import java.io.IOException;
-import java.sql.Connection;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import modelos.*;
-import utils.Conexion;
-import utils.UtilidadXml;
-
-
+import modelos.Cliente;
+import modelos.ClienteDAO;
+import modelos.Coche;
 public class PrimaryController {
 
 	@FXML
@@ -44,10 +36,10 @@ public class PrimaryController {
     private TableColumn<Coche, String> colorcoche;
 
     @FXML
-    private TableColumn<Coche, Integer> potenciacoche;
+    private TableColumn<Coche, String> potenciacoche;
 
     @FXML
-    private TableColumn<Coche, Double> preciocoche;
+    private TableColumn<Coche, String> preciocoche;
     @FXML
     private TableColumn<Cliente, String> nombrecliente;
 
@@ -56,19 +48,21 @@ public class PrimaryController {
     
     private ObservableList<Cliente> listaClientes;
     private ObservableList<Coche> listaCoches;
+    private ObservableList<Cliente> listaClienActualizada;
+    private ClienteDAO c;
+   // private int posicionEnLaTabla;
     
     @FXML
     protected void initialize () {
     	
-    	configurarTabla();
+    	configurarTablaClientes();
     	mostrarInformacion(null);
     	listaClientes = FXCollections.observableArrayList(ClienteDAO.MostrarTodos());
     	tabladeclientes.setItems(listaClientes);
     	tabladeclientes.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> mostrarInformacion(newValue));
     	
-    	
     }
-    private void configurarTabla() {
+    private void configurarTablaClientes() {
         dnicliente.setCellValueFactory(cadacliente -> {
             SimpleStringProperty v = new SimpleStringProperty();
             v.setValue(cadacliente.getValue().getDni());
@@ -80,9 +74,44 @@ public class PrimaryController {
             return v;
         });
     }
+    @FXML
+    private void configurarTablaCoches() {
+    	if(tabladeclientes.getSelectionModel().getSelectedItem() != null) {
+    	c = new ClienteDAO(tabladeclientes.getSelectionModel().getSelectedItem().getDni());
+    	listaCoches = FXCollections.observableArrayList(c.getMisCoches());    	
+    	tabladecoches.setItems(listaCoches);
+
+    	matriculacoche.setCellValueFactory(cadacoche -> {
+            SimpleStringProperty v = new SimpleStringProperty();
+            v.setValue(cadacoche.getValue().getMatricula());
+            return v;
+        });
+		marcacoche.setCellValueFactory(cadacoche -> {
+            SimpleStringProperty v = new SimpleStringProperty();
+            v.setValue(cadacoche.getValue().getMarca());
+            return v;
+        });
+		colorcoche.setCellValueFactory(cadacoche -> {
+            SimpleStringProperty v = new SimpleStringProperty();
+            v.setValue(cadacoche.getValue().getColor());
+            return v;
+        });
+		potenciacoche.setCellValueFactory(cadacoche -> {
+            SimpleStringProperty v = new SimpleStringProperty();
+            v.setValue(cadacoche.getValue().getPotencia()+"");
+            return v;
+        });
+		preciocoche.setCellValueFactory(cadacoche -> {
+           SimpleStringProperty v = new SimpleStringProperty();
+            v.setValue(cadacoche.getValue().getPrecio()+"");
+            return v;
+        });
+    	}
+    }
+    
     
     private void mostrarInformacion(Cliente c) {
-    	
+    	tabladecoches.setItems(null);
     	if (c != null) {
     		edadcliente.setText(c.getEdad()+"");
     		telefonocliente.setText(c.getTelefono()+"");
@@ -93,7 +122,26 @@ public class PrimaryController {
     	}
     	
     	
+    	
     }
+    @FXML
+    private void actualizarTabla() {
+    	configurarTablaClientes();
+    	listaClienActualizada = FXCollections.observableArrayList(ClienteDAO.MostrarTodos());
+    	tabladeclientes.setItems(listaClienActualizada);
+
+
+    }
+    @FXML
+	private void editarCliente() {
+		try {
+			App.loadScene(new Stage(), "editarCoche", "Menu editar cliente");
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
     @FXML
     private void infoApp() {
     	
@@ -105,4 +153,36 @@ public class PrimaryController {
 			e.printStackTrace();
 		}
     }
+    @FXML
+    private void mostrarCoches() {
+    	
+    	try {
+			App.loadScene(new Stage(), "mostrarCoches", "Gestor de coches");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    @FXML
+    private void añadirCliente() {
+    	
+    	try {
+			App.loadScene(new Stage(), "añadirCliente", "Añadir cliente");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    @FXML 
+    private void borrarCliente() {
+    
+    	
+    	String dni=tabladeclientes.getSelectionModel().selectedItemProperty().get().getDni();
+    	
+    	ClienteDAO cliente = new ClienteDAO();
+
+    	cliente.eliminar(dni);
+    	actualizarTabla();
+}
+    
 }

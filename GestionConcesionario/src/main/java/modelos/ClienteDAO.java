@@ -15,7 +15,10 @@ import utils.UtilidadXml;
 public class ClienteDAO extends Cliente {
 
 	// SENTENCIAS SQL
-
+	private final static String AÑADIR = "INSERT INTO cliente (dni,nombre,edad,telefono)"
+			+ "VALUES (?,?,?,?)";
+	private final static String EDITAR = "UPDATE cliente SET dni=?,nombre=?,edad=?,telefono=?";
+	private final static String BORRAR = "DELETE FROM cliente WHERE dni=?";
 	private final static String ASIGNAR = "UPDATE coche SET dni_cliente=? WHERE matricula=?";
 	private final static String RETIRAR = "UPDATE coche SET dni_cliente=NULL WHERE matricula=? AND dni_cliente=?";
 	private final static String SELECT_COCHES_CLIENTE = "SELECT * FROM coche WHERE dni_cliente=(SELECT dni FROM cliente WHERE dni=?)";
@@ -35,7 +38,27 @@ public class ClienteDAO extends Cliente {
 	// HACER EL CONSTRUCTOR CONTODOS LOSD DATOS DEL CLIENTE , PARACUANDO LO
 	// SELECIONE DE LA LISTA TENGA EL CLIENTE ENTERO
 	public ClienteDAO(String dni) {
-		this.dni = dni;
+		Connection con = Conexion.getConexion(UtilidadXml.loadFile("es.iesfranciscodelosrios.conexion.xml"));
+
+		if (con != null) {
+			try {
+				PreparedStatement q = con.prepareStatement(SELECT_INFO_CLIENTE);
+				q.setString(1, dni);
+				ResultSet rs = q.executeQuery();
+				while (rs.next()) {
+					setDni(rs.getString("dni"));
+					setNombre(rs.getString("nombre"));
+					setEdad(rs.getInt("edad"));
+					setTelefono(rs.getInt("telefono"));
+
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
 	}
 
 	public ClienteDAO(Cliente cl) {
@@ -54,8 +77,48 @@ public class ClienteDAO extends Cliente {
 	 * Recibe el dni del cliente y la matricula del coche. Asignara el coche al
 	 * cliente.
 	 */
-
-	public int asignar(String matricula) {
+	public int añadir() {
+		int result = 0;
+		Connection con = Conexion.getConexion(UtilidadXml.loadFile("es.iesfranciscodelosrios.conexion.xml"));
+		if(con != null) {
+			
+			try {
+				PreparedStatement q = con.prepareStatement(AÑADIR);
+				q.setString(1, this.dni);
+				q.setString(2, this.nombre);
+				q.setInt(3, this.edad);
+				q.setInt(4, this.telefono);
+				result = q.executeUpdate();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	public int eliminar(String dni) {
+		int rs=0;
+		Connection con = Conexion.getConexion(UtilidadXml.loadFile("es.iesfranciscodelosrios.conexion.xml"));
+		if(con != null) {
+			try {
+				PreparedStatement q = con.prepareStatement(BORRAR);
+				q.setString(1, dni);
+				rs = q.executeUpdate();
+				this.dni="-1";
+				this.nombre="";
+				this.edad=-1;
+				this.telefono=-1;
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		return rs;
+	}
+	public  int asignar(String dni,  String matricula) {
 		int rs = 0;
 		Connection con = Conexion.getConexion(UtilidadXml.loadFile("es.iesfranciscodelosrios.conexion.xml"));
 		if (con != null) {
@@ -72,7 +135,7 @@ public class ClienteDAO extends Cliente {
 		}
 		return rs;
 	}
-
+	
 	/*
 	 * Retirar:
 	 * 
@@ -80,7 +143,7 @@ public class ClienteDAO extends Cliente {
 	 * cliente.
 	 */
 
-	public int retirar(String matricula) {
+	public int retirar(String dni, String matricula) {
 		int rs = 0;
 
 		Connection con = Conexion.getConexion(UtilidadXml.loadFile("es.iesfranciscodelosrios.conexion.xml"));
@@ -99,36 +162,7 @@ public class ClienteDAO extends Cliente {
 		return rs;
 	}
 
-	/*<y
-	 * MostrarInfoCliente:
-	 * 
-	 * Recibe el dni del cliente. Devolvera la informacion de dicho cliente.
-	 */
-	public void MostrarInfoCliente(String dni) {
-
-		Connection con = Conexion.getConexion(UtilidadXml.loadFile("es.iesfranciscodelosrios.conexion.xml"));
-		Cliente cl = new Cliente();
-
-		if (con != null) {
-			try {
-				PreparedStatement q = con.prepareStatement(SELECT_INFO_CLIENTE);
-				q.setString(1, dni);
-				ResultSet rs = q.executeQuery();
-				while (rs.next()) {
-					cl.setDni(rs.getString("dni"));
-					cl.setNombre(rs.getString("nombre"));
-					cl.setEdad(rs.getInt("edad"));
-					cl.setTelefono(rs.getInt("telefono"));
-
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-		System.out.println(cl);
-	}
+	
 	/*
 	 * getClientePorDNI:
 	 * 
@@ -231,66 +265,4 @@ public class ClienteDAO extends Cliente {
 		}
 		return result;
 	}
-	/*
-	public ClienteDAO clienteParaAsignacion() {
-		List<Cliente> lista = ClienteDAO.MostrarTodos();
-		vistasListas.listaClientes(lista);
-		System.out.println("ELIGE UN CLIENTE");
-		int num_seleccionado = InsertarPorTeclado.getIntWithRange(0, lista.size() - 1);
-		ClienteDAO c = null;
-		for (int i = 0; i < lista.size(); i++) {
-			if (num_seleccionado == i) {
-				c = new ClienteDAO(lista.get(i).getDni());
-				System.out.println("Inserta la matricula del coche");
-				String matricula = InsertarPorTeclado.getString();
-				if (CocheDAO.ComprMatriculaExiste(matricula)) {
-					c.asignar(matricula);
-					System.out.println("COCHE ASIGNADO");
-				} else {
-					System.out.println("EL COCHE NO EXISTE, NO SE PUDO ASIGNAR");
-				}
-			}
-		}
-		return c;
-	}
-
-	public ClienteDAO clienteParaDesAsignacion() {
-
-		ClienteDAO c = null;
-		// PARA CLIENTES
-		List<Cliente> listaClientes = ClienteDAO.MostrarTodos();
-		vistasListas.listaClientes(listaClientes);
-		System.out.println("ELIGE UN CLIENTE");
-		int num_seleccionadoCliente = InsertarPorTeclado.getIntWithRange(0, listaClientes.size() - 1);
-
-		for (int i = 0; i < listaClientes.size(); i++) {
-			
-			if (num_seleccionadoCliente == i) {
-				c = new ClienteDAO(listaClientes.get(i).getDni());
-				// PARA COCHES
-				List<Coche> listaCoches = c.getMisCoches();
-				if(listaCoches.size() !=0) {
-				vistasListas.listaCoches(listaCoches);
-				System.out.println("ELIGE UN COCHE");
-				int num_seleccionadoCoche = InsertarPorTeclado.getIntWithRange(0, listaClientes.size() - 1);
-
-				for (int j = 0; j < listaCoches.size(); j++) {
-
-					if (num_seleccionadoCoche == j) {
-
-						c.retirar(listaCoches.get(j).getMatricula());
-						System.out.println("COCHE RETIRARO");
-					} else {
-						System.out.println("EROR AL RETIRARLO");
-					}
-
-				}
-				}else {
-					System.out.println("EL CLIENTE NO TIENE COCHES");
-				}
-			}
-		}
-		return c;
-	}
-	*/
 }
