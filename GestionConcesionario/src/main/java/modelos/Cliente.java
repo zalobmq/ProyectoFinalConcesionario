@@ -1,5 +1,3 @@
-
-
 package modelos;
 
 import java.util.List;

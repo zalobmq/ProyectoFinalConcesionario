@@ -1,12 +1,8 @@
 package es.iesfranciscodelosrios.GestionConcesionario;
 
-import java.awt.event.ActionEvent;
-
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import modelos.ClienteDAO;
 
 public class añadirClienteController {

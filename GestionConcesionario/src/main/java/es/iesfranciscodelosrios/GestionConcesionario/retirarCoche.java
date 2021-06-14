@@ -9,8 +9,6 @@ import javafx.scene.control.TextField;
 import modelos.Cliente;
 import modelos.ClienteDAO;
 import modelos.Coche;
-import modelos.CocheDAO;
-
 public class retirarCoche {
 
 	@FXML
@@ -34,9 +32,6 @@ public class retirarCoche {
     @FXML
     private TableColumn<Coche, String> preciocoche;
 	//----------------------
-   
-    
-
     @FXML
     private TableColumn<Cliente, String> dnicliente;
     @FXML
@@ -45,7 +40,6 @@ public class retirarCoche {
     
     private ObservableList<Cliente> listaClientes;
     private ObservableList<Coche> listaCoches;
-    private ObservableList<Coche> listaClienActualizada;
     private ClienteDAO c;
 
     @FXML
@@ -78,47 +72,6 @@ public class retirarCoche {
             return v;
         });
     }
-	/*
-	private void configurarTablaCoches() {
-		matriculacoche.setCellValueFactory(cadacoche -> {
-            SimpleStringProperty v = new SimpleStringProperty();
-            v.setValue(cadacoche.getValue().getMatricula());
-            return v;
-        });
-		marcacoche.setCellValueFactory(cadacoche -> {
-            SimpleStringProperty v = new SimpleStringProperty();
-            v.setValue(cadacoche.getValue().getMarca());
-            return v;
-        });
-		colorcoche.setCellValueFactory(cadacoche -> {
-            SimpleStringProperty v = new SimpleStringProperty();
-            v.setValue(cadacoche.getValue().getColor());
-            return v;
-        });
-		potenciacoche.setCellValueFactory(cadacoche -> {
-            SimpleStringProperty v = new SimpleStringProperty();
-            v.setValue(cadacoche.getValue().getPotencia()+"");
-            return v;
-        });
-		preciocoche.setCellValueFactory(cadacoche -> {
-           SimpleStringProperty v = new SimpleStringProperty();
-            v.setValue(cadacoche.getValue().getPrecio()+"");
-            return v;
-        });
-	}
-	/*
-	@FXML
-	private void tablaCochesCliente() {
-		configurarTablaCoches();
-		ClienteDAO cliente = new ClienteDAO();
-		
-		listaCoches =(ObservableList<Coche>) tablaclientes.getSelectionModel().selectedItemProperty().get().getMisCoches();
-		//listaClientes = FXCollections.observableArrayList(cliente.getMisCoches());
-    	tablacoches.setItems(listaCoches);
-
-    	//listaCoches = FXCollections.observableArrayList(CocheDAO.mostrarCochesConPropietario());
-	}
-	*/
 	@FXML
     private void configurarTablaCoches() {
     	if(tablaclientes.getSelectionModel().getSelectedItem() != null) {
@@ -168,16 +121,6 @@ public class retirarCoche {
 		cliente.retirar(dni,matricula);
 		actualizarTabla();		
 	}
-	/*
-	private void cocheCliente() {
-		
-		
-		ClienteDAO cliente = new 
-	}
-	*/
-	
-	
-
 	private void actualizarTabla() {
     		c = new ClienteDAO(tablaclientes.getSelectionModel().getSelectedItem().getDni());
         	listaCoches = FXCollections.observableArrayList(c.getMisCoches());    	
@@ -208,11 +151,5 @@ public class retirarCoche {
             v.setValue(cadacoche.getValue().getPrecio()+"");
             return v;
         });
-    	
-
-
-    }
-	
-	
-	
+    }	
 }

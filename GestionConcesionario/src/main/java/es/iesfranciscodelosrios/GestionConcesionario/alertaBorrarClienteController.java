@@ -2,7 +2,8 @@ package es.iesfranciscodelosrios.GestionConcesionario;
 
 import javafx.fxml.FXML;
 
-public class avisoBorrarController {
+public class alertaBorrarClienteController {
+
 	@FXML
 	protected void initialize() {
 		

@@ -1,18 +1,14 @@
 package es.iesfranciscodelosrios.GestionConcesionario;
-
-
 import java.io.IOException;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-import modelos.ClienteDAO;
 import modelos.Coche;
 import modelos.CocheDAO;
 
@@ -53,12 +49,6 @@ public class SecondaryController {
 
 	@FXML
 	protected void initialize() {
-	//buttonMostrarTodos();
-	
-	//ButtonAsignadoSI();
-		
-		
-
 	}
 	
 	private void configurarTabla() {
@@ -259,10 +249,5 @@ public class SecondaryController {
 		configurarTabla();
 		listaClienActualizada = FXCollections.observableArrayList(CocheDAO.mostrarTodosLosCoches());
 		tablacoches.setItems(listaClienActualizada);
-    }
-	
-	
-	
-	
-	
+    }	
 }

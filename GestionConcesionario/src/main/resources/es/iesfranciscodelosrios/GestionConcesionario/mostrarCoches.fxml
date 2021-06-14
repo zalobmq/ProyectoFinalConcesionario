@@ -21,7 +21,7 @@
           <TableColumn fx:id="marcacoche" prefWidth="104.0" resizable="false" text="Marca" />
             <TableColumn fx:id="colorcoche" prefWidth="87.0" resizable="false" text="Color" />
             <TableColumn fx:id="potenciacoche" prefWidth="111.0" resizable="false" text="Potencia" />
-            <TableColumn fx:id="preciocoche" prefWidth="111.0" text="Percio" />
+            <TableColumn fx:id="preciocoche" prefWidth="111.0" text="Precio" />
             <TableColumn fx:id="asignadocoche" prefWidth="69.0" resizable="false" text="Asignado" />
         </columns>
       </TableView>

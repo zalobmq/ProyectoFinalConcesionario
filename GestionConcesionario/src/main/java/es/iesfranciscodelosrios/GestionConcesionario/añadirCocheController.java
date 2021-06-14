@@ -34,11 +34,7 @@ public class añadirCocheController {
 		coche.setColor(txcolor.getText());
 		coche.setPotencia(Integer.parseInt(txpotencia.getText()));
 		coche.setPrecio(Integer.parseInt(txprecio.getText()));
-		//coche.setCliente(null);
-
 		coche.añadir();
 		
-		
-
 	}
 }

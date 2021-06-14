@@ -38,7 +38,7 @@ public class ClienteDAO extends Cliente {
 	// HACER EL CONSTRUCTOR CONTODOS LOSD DATOS DEL CLIENTE , PARACUANDO LO
 	// SELECIONE DE LA LISTA TENGA EL CLIENTE ENTERO
 	public ClienteDAO(String dni) {
-		Connection con = Conexion.getConexion(UtilidadXml.loadFile("es.iesfranciscodelosrios.conexion.xml"));
+		Connection con = Conexion.getConexion(UtilidadXml.loadFile("conexion.xml"));
 
 		if (con != null) {
 			try {
@@ -79,7 +79,7 @@ public class ClienteDAO extends Cliente {
 	 */
 	public int añadir() {
 		int result = 0;
-		Connection con = Conexion.getConexion(UtilidadXml.loadFile("es.iesfranciscodelosrios.conexion.xml"));
+		Connection con = Conexion.getConexion(UtilidadXml.loadFile("conexion.xml"));
 		if(con != null) {
 			
 			try {
@@ -99,7 +99,7 @@ public class ClienteDAO extends Cliente {
 	}
 	public int eliminar(String dni) {
 		int rs=0;
-		Connection con = Conexion.getConexion(UtilidadXml.loadFile("es.iesfranciscodelosrios.conexion.xml"));
+		Connection con = Conexion.getConexion(UtilidadXml.loadFile("conexion.xml"));
 		if(con != null) {
 			try {
 				PreparedStatement q = con.prepareStatement(BORRAR);
@@ -120,7 +120,7 @@ public class ClienteDAO extends Cliente {
 	}
 	public  int asignar(String dni,  String matricula) {
 		int rs = 0;
-		Connection con = Conexion.getConexion(UtilidadXml.loadFile("es.iesfranciscodelosrios.conexion.xml"));
+		Connection con = Conexion.getConexion(UtilidadXml.loadFile("conexion.xml"));
 		if (con != null) {
 			try {
 				PreparedStatement q = con.prepareStatement(ASIGNAR);
@@ -146,7 +146,7 @@ public class ClienteDAO extends Cliente {
 	public int retirar(String dni, String matricula) {
 		int rs = 0;
 
-		Connection con = Conexion.getConexion(UtilidadXml.loadFile("es.iesfranciscodelosrios.conexion.xml"));
+		Connection con = Conexion.getConexion(UtilidadXml.loadFile("conexion.xml"));
 		if (con != null) {
 			try {
 				PreparedStatement q = con.prepareStatement(RETIRAR);
@@ -171,7 +171,7 @@ public class ClienteDAO extends Cliente {
 
 	public static ClienteDAO getClientePorDNI(String dni) {
 
-		Connection con = Conexion.getConexion(UtilidadXml.loadFile("es.iesfranciscodelosrios.conexion.xml"));
+		Connection con = Conexion.getConexion(UtilidadXml.loadFile("conexion.xml"));
 		ClienteDAO result = new ClienteDAO();
 
 		if (con != null) {
@@ -206,7 +206,7 @@ public class ClienteDAO extends Cliente {
 	public List<Coche> getMisCoches() {
 		List<Coche> result = super.getMisCoches();
 		if (result == null) {
-			Connection con = Conexion.getConexion(UtilidadXml.loadFile("es.iesfranciscodelosrios.conexion.xml"));
+			Connection con = Conexion.getConexion(UtilidadXml.loadFile("conexion.xml"));
 			if (con != null) {
 				result = new ArrayList<>();
 				try {
@@ -241,7 +241,7 @@ public class ClienteDAO extends Cliente {
 
 	public static List<Cliente> MostrarTodos() {
 		List<Cliente> result = new ArrayList<Cliente>();
-		Connection con = Conexion.getConexion(UtilidadXml.loadFile("es.iesfranciscodelosrios.conexion.xml"));
+		Connection con = Conexion.getConexion(UtilidadXml.loadFile("conexion.xml"));
 		if (con != null) {
 
 			try {

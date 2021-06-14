@@ -61,9 +61,6 @@ public class asignarCoche {
     	configurarTablaCoches();
     	listaCoches = FXCollections.observableArrayList(CocheDAO.mostrarCochesSinPropietario());
     	tablacoches.setItems(listaCoches);
- 
-
-
 	}
 	
 	private void configurarTablaClientes() {
@@ -78,6 +75,7 @@ public class asignarCoche {
             return v;
         });
     }
+	
 	private void configurarTablaCoches() {
 		matriculacoche.setCellValueFactory(cadacoche -> {
             SimpleStringProperty v = new SimpleStringProperty();
@@ -122,8 +120,6 @@ public class asignarCoche {
 		actualizarTabla();		
 	}
 	
-	
-
 	private void actualizarTabla() {
     	configurarTablaClientes();
     	listaClienActualizada = FXCollections.observableArrayList(CocheDAO.mostrarCochesSinPropietario());

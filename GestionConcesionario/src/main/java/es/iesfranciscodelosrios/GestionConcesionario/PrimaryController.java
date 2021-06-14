@@ -119,10 +119,7 @@ public class PrimaryController {
     	}else {
     		edadcliente.setText("");
     		telefonocliente.setText("");
-    	}
-    	
-    	
-    	
+    	} 	
     }
     @FXML
     private void actualizarTabla() {
@@ -177,12 +174,22 @@ public class PrimaryController {
     private void borrarCliente() {
     
     	
-    	String dni=tabladeclientes.getSelectionModel().selectedItemProperty().get().getDni();
+    	String dni=tabladeclientes.getSelectionModel().selectedItemProperty().get().getDni();   	
+    	ClienteDAO cliente = new ClienteDAO(dni);
+    	if (cliente.getMisCoches().size() == 0) {
+    		
+    		cliente.eliminar(dni);
+        	actualizarTabla();
+        	
+    	}else {
     	
-    	ClienteDAO cliente = new ClienteDAO();
-
-    	cliente.eliminar(dni);
-    	actualizarTabla();
+    		try {
+    			App.loadScene(new Stage(), "alertaBorrarCliente", "Alerta borrar cliente");
+    		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+    		}
+    	}
 }
     
 }
