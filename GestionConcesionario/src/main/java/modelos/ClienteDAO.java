@@ -17,7 +17,6 @@ public class ClienteDAO extends Cliente {
 	// SENTENCIAS SQL
 	private final static String AÑADIR = "INSERT INTO cliente (dni,nombre,edad,telefono)"
 			+ "VALUES (?,?,?,?)";
-	private final static String EDITAR = "UPDATE cliente SET dni=?,nombre=?,edad=?,telefono=?";
 	private final static String BORRAR = "DELETE FROM cliente WHERE dni=?";
 	private final static String ASIGNAR = "UPDATE coche SET dni_cliente=? WHERE matricula=?";
 	private final static String RETIRAR = "UPDATE coche SET dni_cliente=NULL WHERE matricula=? AND dni_cliente=?";
